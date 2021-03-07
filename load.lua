@@ -11,9 +11,12 @@ local messages = {
 	"Lol, this took less than an hour to make",
 	"IAteYourDog car4864 is pretty cool tbh",
 	"Do the devs know what anti exploit is?",
-	"Good lucking fixing this lol",
+	"Good luck fixing this lol",
 	"I remember when it was actually hard to exploit a game",
-	"Aww, you thought banning 1 out of 600 accounts would do a thing?"
+	"Aww, you thought banning 1 out of 600 accounts would do a thing?",
+	"Hi devs, if you see this message. Make your game better lol",
+	"I thought you 'patched' my script?",
+	"I love seeing watching this game die tbh"
 }
 
 print("Loading")
