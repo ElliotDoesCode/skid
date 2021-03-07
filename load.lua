@@ -79,7 +79,7 @@ local function go(plr)
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vehicle.CFrame + Vector3.new(0,3,0)
 	game.Players.LocalPlayer.Character.Humanoid:ChangeState(10)
 	enterCar(vehicle)
-	vehicle.Parent.Parent:SetPrimaryPartCFrame(target.CFrame)
+	vehicle.Parent.Parent:SetPrimaryPartCFrame(target.CFrame + Vector3.new(0,3,0))
 
 	wait(0.5)
 end
@@ -112,7 +112,7 @@ end)
 for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 	if v.Team and v.Team.Name == "Criminals" then
 		local target = v.Character.UpperTorso
-		go(target.CFrame + Vector3.new(0,3,0))
+		go(target)
 		if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
 			leave()
 			wait(.3)
