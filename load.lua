@@ -96,7 +96,7 @@ local function sererHop()
 	print("Work in progress")
 	game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
 		if State == Enum.TeleportState.Started then
-			syn.queue_on_teleport(tostring(game:HttpGet("https://pastebin.com/raw/7r3JgU3n")))
+			syn.queue_on_teleport(game:HttpGet("https://elliotdoescode.github.io/skid/load.lua"))
 		end
 	end)
 end
