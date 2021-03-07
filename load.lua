@@ -120,11 +120,14 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 	if v.Team and v.Team.Name == "Criminals" then
 		local target = v.Character.UpperTorso
 		go(target)
+		wait()
 		if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
-			leave()
-			wait(.3)
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target.CFrame
+			for count = 1, 3 do
+				leave()
+			end
 			taze(target.Parent.Head)
+			wait(0.4)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target.CFrame + Vector3.new(0,3,0)
 			wait(0.4)
 			arrest(target)
 		end
