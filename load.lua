@@ -1,6 +1,6 @@
 --[[
 	Made by IAteYourDog
-	Serverhop made by https://discord.gg/FPGVwqV
+	Serverhop made by https://v3rmillion.net/showthread.php?tid=1040972
 	Everything else was made by IAteYourDog
 ]]
 local messages = {
@@ -108,6 +108,11 @@ local function sererHop()
 	end)
 end
 
+--[[
+	LITERAL TRASH LMFAO
+]]
+local a=game.PlaceId;local b={}local c=""local d=os.date("!*t").hour;local e=false;local f=pcall(function()b=game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))end)if not f then table.insert(b,d)writefile("NotSameServers.json",game:GetService('HttpService'):JSONEncode(b))end;function TPReturner()local g;if c==""then g=game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/'..a..'/servers/Public?sortOrder=Asc&limit=100'))else g=game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/'..a..'/servers/Public?sortOrder=Asc&limit=100&cursor='..c))end;local h=""if g.nextPageCursor and g.nextPageCursor~="null"and g.nextPageCursor~=nil then c=g.nextPageCursor end;local i=0;for j,k in pairs(g.data)do local l=true;h=tostring(k.id)if tonumber(k.maxPlayers)>tonumber(k.playing)then for m,n in pairs(b)do if i~=0 then if h==tostring(n)then l=false end else if tonumber(d)~=tonumber(n)then local o=pcall(function()delfile("NotSameServers.json")b={}table.insert(b,d)end)end end;i=i+1 end;if l==true then table.insert(b,h)wait()pcall(function()writefile("NotSameServers.json",game:GetService('HttpService'):JSONEncode(b))wait()game:GetService("TeleportService"):TeleportToPlaceInstance(a,h,game.Players.LocalPlayer)end)wait(4)end end end end;function Teleport()while wait()do pcall(function()TPReturner()if c~=""then TPReturner()end end)end end
+
 spawn(function()
 	while wait(3) do
 		chat()
@@ -130,19 +135,5 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 	end
 end
 
-while wait(0.1) do
-	local HttpService, TPService = game:GetService"HttpService", game:GetService"TeleportService";
-	local OtherServers = HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100"))
-	for Index, Server in next, OtherServers["data"] do
-		local ran = math.random(1,5)
-		if Server ~= game.JobId and Server.playing ~= Server.maxPlayers then
-			if ran == 5 then
-				print(Server["id"])
-				sererHop()
-				wait()
-				TPService:TeleportToPlaceInstance(game.PlaceId, Server["id"])
-				break
-			end
-		end
-	end
-end
+sererHop()
+Teleport()
