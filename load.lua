@@ -11,6 +11,8 @@ local messages = {
 	"Lol, this took less than an hour to make"
 }
 
+print("Loading")
+
 if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
@@ -116,9 +118,9 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 			wait(.3)
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target.CFrame
 			taze(target.Parent.Head)
+			wait(0.4)
+			arrest(target)
 		end
-		wait(0.4)
-		arrest(target)
 		wait(2.4)
 	end
 end
