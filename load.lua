@@ -112,7 +112,7 @@ end)
 for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 	if v.Team and v.Team.Name == "Criminals" then
 		local target = v.Character.UpperTorso
-		go(target +Vector3.new(0,3,0))
+		go(target.CFrame + Vector3.new(0,3,0))
 		if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
 			leave()
 			wait(.3)
