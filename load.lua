@@ -138,6 +138,7 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 			end
 			wait(2.4)
 		end
+		repeatFunc()
 	end
 end
 
