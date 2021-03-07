@@ -116,7 +116,7 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 			wait(.3)
 			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target.CFrame
 		end
-		taze(target)
+		taze(target.Parent.Head)
 		wait(0.4)
 		arrest(target)
 		wait(2.4)
