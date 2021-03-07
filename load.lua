@@ -1,6 +1,5 @@
 --[[
 	Made by IAteYourDog
-	Serverhop made by https://v3rmillion.net/showthread.php?tid=1040972
 	Everything else was made by IAteYourDog
 ]]
 local messages = {
@@ -136,7 +135,7 @@ end
 sererHop()
 local x = {}
 for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
-	if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
+	if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId and v.playing > 18 then
 		x[#x + 1] = v.id
 	end
 end
