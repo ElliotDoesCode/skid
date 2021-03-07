@@ -118,20 +118,26 @@ end)
 
 for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 	if v.Team and v.Team.Name == "Criminals" then
-		local target = v.Character.UpperTorso
-		go(target)
-		wait()
-		if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
-			for count = 1, 3 do
-				leave()
+		local function repeatFunc()
+			local target = v.Character.UpperTorso
+			go(target)
+			wait()
+			if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+				if (target.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < 20 then
+					for count = 1, 3 do
+						leave()
+					end
+					taze(target.Parent.Head)
+					wait(0.4)
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target.CFrame + Vector3.new(0,3,0)
+					wait(0.4)
+					arrest(target)
+				else
+					repeatFunc()
+				end
 			end
-			taze(target.Parent.Head)
-			wait(0.4)
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target.CFrame + Vector3.new(0,3,0)
-			wait(0.4)
-			arrest(target)
+			wait(2.4)
 		end
-		wait(2.4)
 	end
 end
 
