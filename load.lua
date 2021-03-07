@@ -111,11 +111,6 @@ local function sererHop()
 	end)
 end
 
---[[
-	LITERAL TRASH LMFAO
-]]
-local a=game.PlaceId;local b={}local c=""local d=os.date("!*t").hour;local e=false;local f=pcall(function()b=game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))end)if not f then table.insert(b,d)writefile("NotSameServers.json",game:GetService('HttpService'):JSONEncode(b))end;function TPReturner()local g;if c==""then g=game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/'..a..'/servers/Public?sortOrder=Asc&limit=100'))else g=game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/'..a..'/servers/Public?sortOrder=Asc&limit=100&cursor='..c))end;local h=""if g.nextPageCursor and g.nextPageCursor~="null"and g.nextPageCursor~=nil then c=g.nextPageCursor end;local i=0;for j,k in pairs(g.data)do local l=true;h=tostring(k.id)if tonumber(k.maxPlayers)>tonumber(k.playing)then for m,n in pairs(b)do if i~=0 then if h==tostring(n)then l=false end else if tonumber(d)~=tonumber(n)then local o=pcall(function()delfile("NotSameServers.json")b={}table.insert(b,d)end)end end;i=i+1 end;if l==true then table.insert(b,h)wait()pcall(function()writefile("NotSameServers.json",game:GetService('HttpService'):JSONEncode(b))wait()game:GetService("TeleportService"):TeleportToPlaceInstance(a,h,game.Players.LocalPlayer)end)wait(4)end end end end;function Teleport()while wait()do pcall(function()TPReturner()if c~=""then TPReturner()end end)end end
-
 spawn(function()
 	while wait(3) do
 		chat()
@@ -139,4 +134,12 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 end
 
 sererHop()
-Teleport()
+local x = {}
+for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+	if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId then
+		x[#x + 1] = v.id
+	end
+end
+if #x > 0 then
+	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
+end
