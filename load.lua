@@ -133,12 +133,16 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 end
 
 sererHop()
-local x = {}
-for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
-	if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId and v.playing > 18 then
-		x[#x + 1] = v.id
-	end
-end
-if #x > 0 then
-	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
+while wait() do
+	pcall(function()
+		local x = {}
+		for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
+			if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId and v.playing > 18 then
+				x[#x + 1] = v.id
+			end
+		end
+		if #x > 0 then
+			game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
+		end
+	end)
 end
