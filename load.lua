@@ -108,7 +108,28 @@ local function sererHop()
 			syn.queue_on_teleport(game:HttpGet("https://elliotdoescode.github.io/skid/load.lua"))
 		end
 	end)
+	wait()
+	while wait() do
+		local worked, failed = pcall(function()
+			--My Beta Serverhop
+			for _,v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..tonumber(game.PlaceId).."/servers/Public?sortOrder=Asc&limit=100")).data) do
+				if type(v) == "table" then --Might have to change this because sometimes roblox jsondecode glitches and doesn't return as a table?
+					if tonumber(v["playing"]) ~= tonumber(v["maxPlayers"]) and tonumber(v["playing"]) > tonumber(v["maxPlayers"]) / 2 then
+						--Might change this later maybe like a table.sort
+						game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,v["id"])
+					end
+				end
+			end
+		end)
+		if not worked then print(failed) end
+	end
 end
+
+--If LocalPlayer Disconnects (NOT MADE BY ME: https://v3rmillion.net/showthread.php?tid=896572)
+local prompt = assert(game:GetService("CoreGui"):FindFirstChild("promptOverlay", true), "Lol it should work :/")
+prompt.ChildAdded:Connect(function(child)
+	assert(child, typeof(child) == "Instance" and child.Name == "ErrorPrompt" and child.ClassName == "Frame" and wait(2) and print("Disconnected") and game:GetService("Players").LocalPlayer:Kick("Autoarrest detected anti-exploit kick. Bypassing...") and Serverhop())
+end)
 
 spawn(function()
 	while wait(3) do
@@ -145,17 +166,3 @@ for _,v in pairs(game:GetService("Players"):GetPlayers()) do
 end
 
 sererHop()
-while wait() do
-	local worked, failed = pcall(function()
-		--My Beta Serverhop
-		for _,v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..tonumber(game.PlaceId).."/servers/Public?sortOrder=Asc&limit=100")).data) do
-			if type(v) == "table" then --Might have to change this because sometimes roblox jsondecode glitches and doesn't return as a table?
-				if tonumber(v["playing"]) ~= tonumber(v["maxPlayers"]) and tonumber(v["playing"]) > tonumber(v["maxPlayers"]) / 2 then
-					--Might change this later maybe like a table.sort
-					game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,v["id"])
-				end
-			end
-		end
-	end)
-	if not worked then print(failed) end
-end
