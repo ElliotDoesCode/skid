@@ -125,12 +125,6 @@ local function sererHop()
 	end
 end
 
---If LocalPlayer Disconnects (NOT MADE BY ME: https://v3rmillion.net/showthread.php?tid=896572)
-local prompt = assert(game:GetService("CoreGui"):FindFirstChild("promptOverlay", true), "Lol it should work :/")
-prompt.ChildAdded:Connect(function(child)
-	assert(child, typeof(child) == "Instance" and child.Name == "ErrorPrompt" and child.ClassName == "Frame" and wait(2) and print("Disconnected") and game:GetService("Players").LocalPlayer:Kick("Autoarrest detected anti-exploit kick. Bypassing...") and Serverhop())
-end)
-
 spawn(function()
 	while wait(3) do
 		chat()
@@ -138,6 +132,11 @@ spawn(function()
 end)
 
 for _,v in pairs(game:GetService("Players"):GetPlayers()) do
+	--If LocalPlayer Disconnects (NOT MADE BY ME: https://v3rmillion.net/showthread.php?tid=896572)
+	local prompt = assert(game:GetService("CoreGui"):FindFirstChild("promptOverlay", true), "Lol it should work :/")
+	prompt.ChildAdded:Connect(function(child)
+		assert(child, typeof(child) == "Instance" and child.Name == "ErrorPrompt" and child.ClassName == "Frame" and wait(2) and print("Disconnected")) game:GetService("Players").LocalPlayer:Kick("Autoarrest detected anti-exploit kick. Bypassing...") Serverhop()
+	end)
 	pcall(function()
 		if v.Team and v.Team.Name == "Criminals" then
 			local function repeatFunc()
