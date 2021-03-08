@@ -147,14 +147,14 @@ end
 sererHop()
 while wait() do
 	pcall(function()
-		local x = {}
-		for _, v in ipairs(game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100")).data) do
-			if type(v) == "table" and v.maxPlayers > v.playing and v.id ~= game.JobId and v.playing > 16 then
-				x[#x + 1] = v.id
+		--My Beta Serverhop
+		for _,v in ipairs(game:GetService("HttpService"):JSONDecode("https://games.roblox.com/v1/games/"..tonumber(game.PlaceId).."/servers/Public?sortOrder=Asc&limit=100").data) do
+			if type(v) == "table" then --Might have to change this because sometimes roblox jsondecode glitches and doesn't return as a table?
+				if tonumber(v["playing"]) ~= tonumber(v["maxPlayers"]) and tonumber(v["playing"]) > tonumber(v["maxPlayers"]) / 2 then
+					--Might change this later maybe like a table.sort
+					game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,v["id"])
+				end
 			end
-		end
-		if #x > 0 then
-			game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, x[math.random(1, #x)])
 		end
 	end)
 end
