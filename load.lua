@@ -103,11 +103,8 @@ end
 
 local function sererHop()
 	print("Work in progress")
-	game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
-		if State == Enum.TeleportState.Started then
-			syn.queue_on_teleport(game:HttpGet("https://elliotdoescode.github.io/skid/load.lua"))
-		end
-	end)
+	syn.queue_on_teleport([[if not game:IsLoaded() then game.Loaded:Wait() end 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ElliotDoesCode/skid/master/load.lua",true))()]])
 	wait()
 	while wait() do
 		local worked, failed = pcall(function()
